@@ -1622,9 +1622,12 @@ display:block!important;
 <span id="cb11-2"><a href aria-label="2"></a>  <span class="at">x =</span> raw,</span>
 <span id="cb11-3"><a href aria-label="3"></a>  <span class="at">y =</span> sites,</span>
 <span id="cb11-4"><a href aria-label="4"></a>  <span class="at">by =</span> <span class="fu">join_by</span>(site_id),</span>
-<span id="cb11-5"><a href aria-label="5"></a>  <span class="at">relationship =</span> <span class="st">&quot;many-to-one&quot;</span>,           <span class="co"># a duplicated site would multiply rows: stop</span></span>
-<span id="cb11-6"><a href aria-label="6"></a>  <span class="at">unmatched =</span> <span class="fu">c</span>(<span class="at">x =</span> <span class="st">&quot;error&quot;</span>, <span class="at">y =</span> <span class="st">&quot;drop&quot;</span>)  <span class="co"># a row without a site: stop. Unused sites: drop on purpose</span></span>
-<span id="cb11-7"><a href aria-label="7"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-5"><a href aria-label="5"></a>  <span class="at">relationship =</span> <span class="st">&quot;many-to-one&quot;</span>, <span class="co"># a duplicated site would multiply rows: stop</span></span>
+<span id="cb11-6"><a href aria-label="6"></a>  <span class="at">unmatched =</span> <span class="st">&quot;drop&quot;</span>            <span class="co"># sites that no row uses: drop on purpose</span></span>
+<span id="cb11-7"><a href aria-label="7"></a>)</span>
+<span id="cb11-8"><a href aria-label="8"></a></span>
+<span id="cb11-9"><a href aria-label="9"></a><span class="co"># a row without a site gets NA: stop</span></span>
+<span id="cb11-10"><a href aria-label="10"></a>checkmate<span class="sc">::</span><span class="fu">assert_character</span>(<span class="at">x =</span> processed[[<span class="st">&quot;region&quot;</span>]], <span class="at">any.missing =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p>Every argument is a <strong>decision</strong>. Writing them makes you think about the join, and saves you writing a test for it.</p>
