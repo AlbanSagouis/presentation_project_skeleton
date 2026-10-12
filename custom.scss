@@ -1,0 +1,170 @@
+/*-- scss:defaults --*/
+// iDiv logo palette. Strong colours are for rules, bars and fills only:
+// green and yellow fail text contrast on white. Text is near-black.
+$idiv-green: #70b64f;
+$idiv-yellow: #ffd426;
+$idiv-blue: #538dc8;
+$idiv-black: #1a1918;
+$idiv-green-tint: #b8d694;
+$idiv-yellow-tint: #ffe896;
+$idiv-blue-tint: #b0c4e8;
+
+$body-bg: #ffffff;
+$body-color: $idiv-black;
+$link-color: #2f6aa3;
+$presentation-heading-color: $idiv-black;
+$presentation-heading-font-weight: 700;
+$presentation-h2-font-size: 1.4em;
+
+// System fonts only: nothing is fetched at render time.
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+$presentation-heading-font: $font-family-sans-serif;
+$font-family-monospace: "SF Mono", Menlo, Consolas, "Courier New", monospace;
+
+/*-- scss:rules --*/
+
+/* Section accent: default green. Put a class on a level-1 heading:
+   {.s-green} {.s-blue} {.s-yellow} cycling in that order, or a package
+   colour {.s-renv} {.s-pins} {.s-testthat} when the section is about it. */
+.reveal section { --sec: #70b64f; --sec-tint: #b8d694; }
+.reveal section.s-green  { --sec: #70b64f; --sec-tint: #b8d694; }
+.reveal section.s-blue   { --sec: #538dc8; --sec-tint: #b0c4e8; }
+.reveal section.s-yellow { --sec: #ffd426; --sec-tint: #ffe896; }
+.reveal section.s-renv     { --sec: #9a922f; --sec-tint: #e6e3b5; }
+.reveal section.s-pins     { --sec: #c2560e; --sec-tint: #f1cdb4; }
+.reveal section.s-testthat { --sec: #c31b22; --sec-tint: #eec0c2; }
+
+/* Round iDiv logo, fixed top right on every slide, title slide included */
+.reveal .slide-logo {
+  position: fixed;
+  top: 14px;
+  right: 18px;
+  bottom: auto;
+  left: auto;
+  height: 112px;
+  max-height: 112px;
+  width: auto;
+}
+
+/* Slide number: lower right, never competing with the logo */
+.reveal .slide-number {
+  position: fixed;
+  top: auto;
+  bottom: 12px;
+  right: 18px;
+  left: auto;
+  background: transparent;
+  color: #666666;
+  font-size: 0.5em;
+}
+
+/* Title slide */
+.reveal .slides > section.title-slide {
+  h1.title {
+    font-size: 2.8em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    border-bottom: 6px solid #70b64f;
+    padding-bottom: 0.15em;
+    display: inline-block;
+  }
+  p.subtitle {
+    font-size: 1.1em;
+    font-weight: 300;
+    color: #666666;
+    margin-top: 0.4em;
+  }
+}
+
+/* Slide titles: accent rule underneath, room for the logo on the right */
+.reveal h2 {
+  border-bottom: 3px solid var(--sec);
+  padding-bottom: 0.2em;
+  padding-right: 4.5em;
+  margin-bottom: 0.6em;
+}
+/* Untitled slides (statements): no orphan accent rule */
+.reveal h2:empty { display: none; }
+
+/* Section slides (level 1): near-black title on a thick accent bar */
+.reveal h1 {
+  border-left: 14px solid var(--sec);
+  padding-left: 0.4em;
+}
+.sec-logo { height: 220px; margin: 0.3em 0; }
+
+/* Inline code */
+.reveal p code,
+.reveal li code,
+.reveal td code {
+  color: #2f6aa3;
+  background-color: #f5f5f5;
+  padding: 0.05em 0.35em;
+  border-radius: 3px;
+  font-size: 0.88em;
+}
+
+/* Code blocks */
+.reveal pre {
+  box-shadow: none;
+  border-radius: 6px;
+  width: 100%;
+  margin: 0.4em 0;
+}
+.reveal pre code {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 0.62em;
+  line-height: 1.5;
+  padding: 0.8em 1em;
+  border-radius: 6px;
+}
+
+/* Helpers */
+.accent { border-bottom: 3px solid var(--sec); font-weight: 600; }
+.muted  { color: #888888; font-size: 0.85em; }
+.large  { font-size: 1.25em; line-height: 1.4; }
+.soon   { display: inline-block; background: #ffd426; color: #1a1918; font-weight: 700;
+          padding: 0.1em 0.7em; border-radius: 1em; font-size: 0.7em; letter-spacing: 0.05em; }
+
+/* Statement slides: big quote, near-black on white, accent bar */
+.statement {
+  font-size: 1.6em;
+  line-height: 1.5;
+  font-weight: 300;
+  font-style: italic;
+  text-align: center;
+  padding: 1.2em 2em;
+  border-left: 14px solid var(--sec);
+}
+
+/* Boxes: two columns of "do" and "do not", or any grouping */
+.box { border-radius: 8px; padding: 0.4em 1em; font-size: 0.8em; }
+.box ul { margin: 0.2em 0; }
+.box-yes, .box-green  { background: #e6f1dc; border-left: 6px solid #70b64f; }
+.box-no,  .box-yellow { background: #fff3c4; border-left: 6px solid #ffd426; }
+.box-blue             { background: #e1e9f6; border-left: 6px solid #538dc8; }
+.rule { text-align: center; font-size: 1.05em; font-weight: 600;
+        border-top: 3px solid var(--sec); padding-top: 0.5em; margin-top: 0.8em; }
+
+/* Footer */
+.reveal .footer {
+  font-size: 0.45em;
+  color: #999999;
+}
+
+/* Tables */
+.reveal table {
+  font-size: 0.78em;
+  border-collapse: collapse;
+  width: 100%;
+}
+.reveal table th {
+  border-bottom: 3px solid var(--sec);
+  padding: 0.4em 0.8em;
+  text-align: left;
+}
+.reveal table td {
+  padding: 0.35em 0.8em;
+  border-bottom: 1px solid #e0e0e0;
+}
