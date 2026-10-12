@@ -17,6 +17,15 @@ format:
     transition: fade
     slide-number: true
     progress: true
+    include-after-body:
+      - text: |
+          <script>
+          Reveal.on("ready", e => toggleTitle(e.currentSlide));
+          Reveal.on("slidechanged", e => toggleTitle(e.currentSlide));
+          function toggleTitle(slide) {
+            Reveal.getRevealElement().classList.toggle("on-title-slide", slide.id === "title-slide");
+          }
+          </script>
 engine: knitr
 lang: en-GB
 execute:

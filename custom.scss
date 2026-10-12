@@ -34,29 +34,33 @@ $font-family-monospace: "SF Mono", Menlo, Consolas, "Courier New", monospace;
 .reveal section.s-pins     { --sec: #c2560e; --sec-tint: #f1cdb4; }
 .reveal section.s-testthat { --sec: #c31b22; --sec-tint: #eec0c2; }
 
-/* Round iDiv logo, fixed top right on every slide, title slide included */
+/* Round iDiv logo, fixed top right on every slide, title slide included.
+   !important: Quarto writes its own .slide-logo rule (bottom, 2.2rem) into the
+   page after this stylesheet, with the same specificity, so it would win. */
 .reveal .slide-logo {
-  position: fixed;
-  top: 14px;
-  right: 18px;
-  bottom: auto;
-  left: auto;
-  height: 112px;
-  max-height: 112px;
-  width: auto;
+  position: fixed !important;
+  top: 14px !important;
+  right: 18px !important;
+  bottom: auto !important;
+  left: auto !important;
+  height: 112px !important;
+  max-height: 112px !important;
+  width: auto !important;
 }
 
-/* Slide number: lower right, never competing with the logo */
+/* Slide number: lower right, never competing with the logo. Hidden on the
+   title slide (class set by the script in the qmd). */
 .reveal .slide-number {
-  position: fixed;
-  top: auto;
-  bottom: 12px;
-  right: 18px;
-  left: auto;
+  position: fixed !important;
+  top: auto !important;
+  bottom: 12px !important;
+  right: 18px !important;
+  left: auto !important;
   background: transparent;
   color: #666666;
   font-size: 0.5em;
 }
+.reveal.on-title-slide .slide-number { display: none !important; }
 
 /* Title slide */
 .reveal .slides > section.title-slide {
