@@ -69,7 +69,7 @@ Low friction is the design goal. Everything shown today is in the repo, and the 
 
 # Why this structure {.s-blue}
 
-## Does this look familiar? {.s-blue}
+## Do these feel familiar? {.s-blue}
 
 - Which folder holds the *real* data?
 - Which package versions produced figure 3?
@@ -126,22 +126,6 @@ fish_survey/
 
 # The folder structure {.s-yellow}
 
-## Simple and minimal {.s-yellow}
-
-```
-project-skeleton/
-├── data/
-├── R/
-├── scripts/
-├── outputs/
-├── tests/
-├── docs/
-├── README.md
-└── PROJECT_STRUCTURE.md
-```
-
-Each folder has a short README saying what goes in it.
-
 ## What goes where {.s-yellow}
 
 | Folder | Content |
@@ -152,6 +136,8 @@ Each folder has a short README saying what goes in it.
 | `outputs/` | figures, tables, models: recreated by scripts |
 | `tests/` | `testthat` tests of the **functions** in `R/` (not of your data) |
 | `docs/` | notes, images, anything for humans (and agents) |
+
+Each folder has a short README. `README.md` is **yours**: rewrite it and paste in your own tree (`fs::dir_tree()`). `PROJECT_STRUCTURE.md` is **mine**: the reasons behind the skeleton, same sections as this talk. Read it, then **delete it**.
 
 ::: notes
 Why simple: the colleague repo we looked at had Analysis-Code/, code/, data/raw_data. Everybody invents a layout; the cost is onboarding time. Here you can explain it in one slide. Key rule to stress: tests/ tests functions. Data is checked throughout the scripts, where the data flows.
@@ -167,53 +153,6 @@ Why simple: the colleague repo we looked at had Analysis-Code/, code/, data/raw_
 6. Read `PROJECT_STRUCTURE.md`, then **delete it**
 
 No git history to inherit: `git init` when you are ready, or forced.
-
-## Showing the tree {.s-yellow}
-
-`README.md` shows the tree of **your** project, so a newcomer finds their way. For example:
-
-```
-fish_survey/
-├── fish_survey.Rproj
-├── README.md
-├── R/
-│   ├── check_data.R
-│   └── plot_abundance.R
-├── scripts/
-│   ├── 1_download.R
-│   ├── 2_wrangle.R
-│   └── 3_analyse.R
-├── data/
-├── outputs/
-└── tests/testthat/
-    ├── test-check_data.R
-    └── test-plot_abundance.R
-```
-
-Print yours with `fs::dir_tree()` and paste it in.
-
-## Two files, two jobs {.s-yellow}
-
-:::: {.columns}
-
-::: {.column width="48%"}
-**`README.md`**
-
-**Yours.** Rewrite it: what is *your* project, how to run it, where is the tree.
-:::
-
-::: {.column width="4%"}
-:::
-
-::: {.column width="48%"}
-**`PROJECT_STRUCTURE.md`**
-
-**Mine, for your information only.** The reasons behind the skeleton, the same sections as this talk. Read it, then **delete it**.
-:::
-
-::::
-
-Also in the root: the `.Rproj`, `.gitignore`, `.Rprofile`, `CITATION.cff`, `LICENSE`.
 
 # What to track and what to ignore {.s-green}
 
@@ -326,6 +265,21 @@ pins::pin_read(board = board, name = "fish_survey")
 ```
 
 Data stays out of git, and no path with your user name inside.
+
+## Which data made figure 3? {.s-pins}
+
+Write a **versioned** pin, and every write keeps the older copy.
+
+```{r}
+#| label: pins-versions
+board <- pins::board_folder(path = "/Volumes/synthesis/pins_group", versioned = TRUE)
+
+pins::pin_write(board = board, x = fish_clean, name = "fish_survey")
+pins::pin_versions(board = board, name = "fish_survey")
+pins::pin_read(board = board, name = "fish_survey", version = "20260513T093000Z-1a2b3")
+```
+
+The data changed after the first submission? Note the version in your script and the reviewer's figure comes back.
 
 . . .
 
@@ -442,7 +396,7 @@ raw |>
   check_dataset(required_columns = c("id", "site_id"), id_column = "id")
 
 # 2. After the join (next slide)
-processed <- inner_join(x = raw, y = sites, by = join_by(site_id), ...)
+processed <- left_join(x = raw, y = sites, by = join_by(site_id), ...)
 
 # 3. On the way out
 checkmate::assert_data_frame(x = processed, nrows = nrow(raw))
@@ -453,9 +407,7 @@ checkmate::assert_numeric(x = processed[["abundance"]], lower = 0, any.missing =
 
 ```{r}
 #| label: explicit-join
-library(dplyr)
-
-processed <- inner_join(
+processed <- left_join(
   x = raw,
   y = sites,
   by = join_by(site_id),
@@ -549,13 +501,13 @@ Running `air` and the linter `jarl` on every commit is a job for a git hook: see
 
 ## Three branches, three extras {.s-yellow}
 
-Each branch forks from `main` and adds one thing. Take only what you want.
+Each branch adds one thing. Take only what you want.
 
 | Branch | What it adds |
 |---|---|
 | `githooks` | pre-commit and pre-push checks (`air`, `jarl`, tests) |
 | `zenodo` | archive a release and get a DOI, badge in the README |
-| `website` | Quarto website, published with GitHub Pages |
+| `website` | project website, published with GitHub Pages |
 
 ::: notes
 Say clearly: main is complete without these. Each branch changes only a few files, so `git diff main..<branch>` shows exactly what it adds.

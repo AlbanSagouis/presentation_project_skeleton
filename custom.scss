@@ -115,9 +115,13 @@ $font-family-monospace: "SF Mono", Menlo, Consolas, "Courier New", monospace;
   width: 100%;
   margin: 0.4em 0;
 }
-.reveal pre code {
-  white-space: pre-wrap;
-  word-break: break-word;
+/* !important: the highlighting CSS Quarto adds later says white-space: pre and
+   makes each line an inline-block, which stops long lines (and comments) wrapping */
+.reveal pre code,
+.reveal pre code.sourceCode {
+  white-space: pre-wrap !important;
+  overflow-wrap: anywhere;
+  overflow-x: hidden;
   font-size: 0.62em;
   line-height: 1.5;
   padding: 0.8em 1em;
