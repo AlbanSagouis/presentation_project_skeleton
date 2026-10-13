@@ -1,6 +1,6 @@
 ---
 title: "Bones of a Good Project"
-subtitle: "Six Years, One Repo: What I'm Leaving You"
+subtitle: "Six Years, One Repo"
 author:
   name: Alban Sagouis
   affiliation: iDiv, Leipzig
@@ -117,12 +117,12 @@ But why though?
 ## {.s-blue}
 
 ::: {.statement}
-"Future you is a collaborator<br>who never answers e-mails"
+"Past you is a collaborator<br>who never answers e-mails"
 :::
 
 ## What the skeleton gives you {.s-blue}
 
-| Pain | Answer in the repo |
+| Pain point | Answer in the repo |
 |---|---|
 | Where is the data? | `data/` plus `pins` for shared data |
 | Which package versions? | `renv.lock` |
@@ -492,16 +492,6 @@ left_join <- function(
 
 [Air](https://posit-dev.github.io/air/) is a fast formatter for R.
 
-## Use air in RStudio, on save {.s-blue}
-
-![RStudio: Tools, Global Options, Code, Saving](assets/format-on-save.png){width="55%"}
-
-Set air as the external formatter (Code, Formatting), then tick **Reformat documents on save**.
-
-::: notes
-Install the air command line tool first (posit-dev.github.io/air/editors.html). In RStudio: Tools, Global Options, Code, Formatting, Code formatter: External, Reformat command: {path/to/air} format. The screenshot is from my October 2025 group meeting on publishing code.
-:::
-
 ## Automatic on every commit {.s-blue}
 
 Running `air` and the linter `jarl` on every commit is a job for a git hook: see the `githooks` branch, next section.
@@ -576,7 +566,7 @@ Untested on GitHub itself: the workflow has not run yet. First publish once loca
 
 ## Checks that run on every commit {.s-green}
 
-Git hooks are scripts git runs for you. But `.git/hooks` is **never tracked**, so nobody receives your hooks.
+Git hooks are scripts git runs for you.
 
 . . .
 
@@ -612,8 +602,8 @@ A **skill** is a folder with instructions that Claude Code loads when relevant.
 
 Three of mine were involved:
 
-- `data-wrangling-compendium-skeleton`: scaffolds a project like this
 - `r-code-style`: my R conventions (base pipe, explicit argument names, explicit joins, named chunks, `pkg::fn()`)
+- `data-wrangling-compendium-skeleton`: scaffolds a project like this
 - `qmd-presentation`: this presentation's format (iDiv palette, round logo, speaker notes, named chunks)
 
 ## Skills as part of the scientific process? {.s-green}
@@ -622,7 +612,7 @@ My skills live in a **private** GitHub repo, `github.com/albansagouis/skills`. I
 
 . . .
 
-A question I keep coming back to: if a skill shapes how your analysis is written, should it be archived and cited with the project, like `renv.lock`?
+A question I keep coming back to: if a skill shapes how your analysis is written, should it be versioned and archived with the project, like `renv.lock`?
 
 ## Make your own {.s-green}
 
