@@ -1406,22 +1406,21 @@ display:block!important;
 </section>
 <section id="a-commented-.gitignore" class="slide level2 s-green">
 <h2>A commented <code>.gitignore</code></h2>
-<pre><code># Data: recreated or shared via pins, not stored in git
-data/*
-!data/README.md
+<pre><code># Track what you wrote, ignore the rest
 
-# Outputs: recreated by scripts
-outputs/*
-!outputs/README.md
-
-# R session litter
+## Private or personal
+### Secrets
+.Renviron
+### R session files
 .Rhistory
-.RData
-.Rproj.user/
+.Rproj.user
 
-# renv: track renv.lock, ignore the library
-renv/library/</code></pre>
-<p>The file in the repo explains each block.</p>
+## Recreated by the code
+### Data
+data/raw/**
+### Outputs
+outputs/**</code></pre>
+<p>The file in the repo has the same layout, explains each block and covers more (OS files, rendered files, renv).</p>
 </section></section>
 <section>
 <section id="when-your-data-lives-outside-the-repo-pins" class="title-slide slide level1 s-pins center">
@@ -1546,8 +1545,8 @@ display:block!important;
 </div>
 </section></section>
 <section>
-<section id="testing-your-data-with-testthat-and-checkmate" class="title-slide slide level1 s-testthat center">
-<h1>Testing your data with testthat and checkmate</h1>
+<section id="testing-your-data-with-testthat" class="title-slide slide level1 s-testthat center">
+<h1>Testing your data with testthat</h1>
 <p><img role="img" data-src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI2LjUuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAyNTIxIDI5MTEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI1MjEgMjkxMTsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsOiNEQjFGMjY7fQoJLnN0MXtmaWxsOiNGRkZGRkY7fQoJLnN0MntmaWxsOiNBNTFEMjE7fQoJLnN0M3tmaWxsOm5vbmU7fQoJLnN0NHtvcGFjaXR5OjAuMjU7ZmlsbDojREU1QTI3O2VuYWJsZS1iYWNrZ3JvdW5kOm5ldyAgICA7fQoJLnN0NXtmaWxsOiNFNkIzNUE7fQo8L3N0eWxlPgo8Zz4KCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMjQ1My4xLDc2Ny41IDEyNjAuNSw3OC45IDEyNjAuNSw3OC45IDY3LjYsNzY3LjUgNjcuNiwyMTQ0LjkgMTI2MC41LDI4MzMuNSAyNDUzLjEsMjE0NC45IAkiLz4KCTxwb2x5Z29uIGNsYXNzPSJzdDEiIHBvaW50cz0iMTIxOS4zLDI4ODcuMyAxMjYwLjUsMjkxMSAxNDE0LjIsMjgyMi4xIDEyNjAuNSwyOTExIAkiLz4KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xODYzLjMsMjU2Mi44bDU1Ny4yLTMyMS44bDkuNi01LjVsOTAuOS01Mi41VjcyNy43bDAsMGwtMTAwLjUtNThsLTk1My4xLTU1MC4zTDEyNjAuNSwwbDAsMHYxMTkuNGwwLDAKCQlsOTg1LjMsNTY4LjhsMTc0LjYsMTAwLjl2MTMzOS43bC0xMTYwLDY2OS43bC0xMTYwLTY2OS43bDAsMFY3ODkuMWwzNy40LTIwLjljMC02LjItMC4zLTEyLjQtMC43LTE4LjUKCQljLTIuNC0zMi42LTkuOS02Mi4xLTguOS05Ni4xbC0yNy44LDE2LjFMMCw3MjcuN1YyMTgzbDEwMC41LDU4bDk2NS4xLDU1Ny4ybDE1My43LDg4LjlsNDEuMiwyMy43bDE1My43LTg4LjlsNDEuMi0yMy43CgkJTDE4NjMuMywyNTYyLjh6Ii8+Cgk8Zz4KCQk8cGF0aCBjbGFzcz0ic3QzIiBkPSJNMTI2MC41LDExOS40TDEyNjAuNSwxMTkuNEwxMjYwLjUsMTE5LjR6Ii8+CgkJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSIxODYzLjMsMjU2Mi44IDI0MjAuNSwyMjQxLjMgMjQzMC4xLDIyMzUuOCAyNDIwLjUsMjI0MS4zIAkJIi8+CgkJPHBhdGggY2xhc3M9InN0MSIgZD0iTTEyOC4zLDY1My42Yy0xLjQsMzQuMyw2LjUsNjMuNSw4LjksOTYuMWwxMjgtNzEuN2w5OTUuMy01NTguNWwwLDBWMGwwLDBsMjA2LjksMTE5LjRsOTUzLjEsNTUwLjNsMTAwLjUsNTgKCQkJbDAsMGwtMTAwLjUtNThsLTk1My4xLTU1MC4zTDEyNjAuNSwwbC0yMDYuOSwxMTkuNEwxMDAuNSw2NjkuN0wwLDcyNy43bDAsMGwxMDAuNS01OEwxMjguMyw2NTMuNnoiLz4KCQk8cGF0aCBjbGFzcz0ic3Q0IiBkPSJNMjY0LjksNjc3LjljMTY1LjcsMjg2LjEsNTQ4LjMsNDg2LjUsOTkzLjYsNDg2LjVjNDM5LjgsMCw4MTguNi0xOTUuNiw5ODcuNC00NzYuMmwtOTg1LjMtNTY4LjhsMCwwCgkJCUwyNjQuOSw2NzcuOXoiLz4KCQk8cGF0aCBjbGFzcz0ic3Q1IiBkPSJNMTI1OC44LDIxNzEuM2MxLTEsMi4xLTIuMSwzLjEtMy4xaC0xQzEyNjAuNSwyMTY5LjMsMTI1OS44LDIxNzAuMywxMjU4LjgsMjE3MS4zeiIvPgoJCTxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik04MDkuMyw5NjkuNXYxMTMuNmgxMDIuOXY1NC45SDgwOS4zVjEzNTFjMCw0OS4xLDE0LjEsNzYuOCw1My45LDc2LjhjMTQuMSwwLjMsMjguMS0xLjQsNDEuNS00LjhsMy40LDUzLjkKCQkJYy0xMy43LDUuOC0zNiw5LjktNjMuOCw5LjljLTMzLjYsMC02MC40LTEwLjYtNzcuNS0zMC4yYy0yMC42LTIxLjMtMjcuOC01Ni4zLTI3LjgtMTAyLjl2LTIxNS41aC02MS40di01NC41SDczOXYtOTUuNwoJCQlMODA5LjMsOTY5LjV6Ii8+CgkJPHBhdGggY2xhc3M9InN0MSIgZD0iTTEwMDcsMTMxNy44YzEuNyw5Ny4xLDYzLjgsMTM3LjIsMTM1LjUsMTM3LjJjNTEuNSwwLDgyLjMtOC45LDEwOS40LTIwLjZsMTIuNCw1MS41CgkJCWMtMjUuNCwxMS4zLTY4LjYsMjQuNC0xMzEuNCwyNC40Yy0xMjEuOCwwLTE5NC4yLTc5LjktMTk0LjItMTk5LjNzNzAuMy0yMTMuMSwxODUuMy0yMTMuMWMxMjksMCwxNjMuMywxMTMuNiwxNjMuMywxODYuMwoJCQljMCwxMS4zLTEsMjIuMy0yLjQsMzMuNkwxMDA3LDEzMTcuOHogTTEyMTcuNiwxMjY2LjNjMC43LTQ1LjYtMTguOS0xMTYuNi05OS41LTExNi42Yy03Mi43LDAtMTA0LjYsNjYuOS0xMTAuMSwxMTYuNkgxMjE3LjZ6Ii8+CgkJPHBhdGggY2xhc3M9InN0MSIgZD0iTTEzNDAuMSwxNTE0LjNjMjEuMywxMy43LDU4LjcsMjguNSw5NC43LDI4LjVjNTIuMSwwLDc2LjktMjYuMSw3Ni45LTU4LjdjMC0zNC4zLTIwLjYtNTMuMi03My40LTcyLjcKCQkJYy03MS0yNS40LTEwNC42LTY0LjUtMTA0LjYtMTExLjhjMC02My44LDUxLjUtMTE2LDEzNi41LTExNmM0MC4xLDAsNzUuMSwxMS4zLDk3LjEsMjQuNGwtMTcuOCw1Mi4xYy0yNC40LTE1LjEtNTIuMS0yMy04MS0yMwoJCQljLTQyLjUsMC02Ni4yLDI0LjQtNjYuMiw1My45YzAsMzIuNiwyMy43LDQ3LjMsNzUuMSw2Ni45YzY4LjYsMjYuMSwxMDMuNiw2MC40LDEwMy42LDExOS40YzAsNjkuMy01My45LDExOC40LTE0Ny45LDExOC40CgkJCWMtNDMuMiwwLTgzLjQtMTAuNi0xMTEuMi0yNy4xTDEzNDAuMSwxNTE0LjN6Ii8+CgkJPHBhdGggY2xhc3M9InN0MSIgZD0iTTE3MzMuNiw4ODMuOHYxMTMuNmgxMDIuOXY1NC45aC0xMDIuOXYyMTMuMWMwLDQ5LjEsMTMuNyw3Ni44LDUzLjksNzYuOGMxNC4xLDAuMywyOC4xLTEuNCw0MS41LTQuOAoJCQlsMy40LDUzLjljLTEzLjcsNS44LTM2LDkuOS02My44LDkuOWMtMzMuNiwwLTYwLjQtMTAuNi03Ny41LTMwLjJjLTIwLjYtMjEuMy0yNy44LTU2LjMtMjcuOC0xMDIuOXYtMjE1LjVoLTYxLjRWOTk4aDYxLjR2LTk1LjcKCQkJTDE3MzMuNiw4ODMuOHoiLz4KCQk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNNzUzLjgsMTYwOC4zdjExMy42aDEwMi45djU0LjlINzUzLjh2MjEzLjFjMCw0OS4xLDEzLjcsNzYuOCw1My45LDc2LjhjMTQuMSwwLjMsMjguMS0xLjQsNDEuNS00LjhsMy40LDUzLjkKCQkJYy0xMy43LDUuOC0zNiw5LjktNjMuOCw5LjljLTMzLjYsMC02MC40LTEwLjYtNzcuNS0zMC4yYy0yMC4yLTIxLjMtMjcuOC01Ni4zLTI3LjgtMTAyLjl2LTIxNS41SDYyMnYtNTQuOWg2MS40di05NC43CgkJCUw3NTMuOCwxNjA4LjN6Ii8+CgkJPHBhdGggY2xhc3M9InN0MSIgZD0iTTkxMS42LDE1MzcuM2g3MS43VjE3ODRoMS43YzEyLTIxLjMsMjkuOC0zOC44LDUxLjUtNTAuOGMyMi4zLTEzLDQ3LjctMjAuMiw3My40LTIwLjYKCQkJYzUzLjIsMCwxMzcuOSwzMi42LDEzNy45LDE2OS4xdjIzNWgtNzJ2LTIyNy4xYzAtNjMuOC0yMy43LTExNy43LTkxLjYtMTE3LjdjLTQ2LjcsMC04My40LDMyLjYtOTYuNCw3MS43CgkJCWMtNC4xLDkuOS00LjgsMjAuNi00LjgsMzQuM3YyMzguNGgtNzEuN3YtNTc5LjFIOTExLjZ6Ii8+CgkJPHBhdGggY2xhc3M9InN0MSIgZD0iTTE1NTcuMywyMTE3LjFsLTUuOC00OS43aC0yLjRjLTIyLDMwLjktNjQuNSw1OC43LTEyMC44LDU4LjdjLTc5LjksMC0xMjAuOC01Ni4zLTEyMC44LTExMy42CgkJCWMwLTk1LjQsODUuMS0xNDcuOSwyMzcuOC0xNDYuOHYtOC4yYzAtMzIuNi04LjktOTEuNi04OS45LTkxLjZjLTM2LjQsMC03MiwxMC4zLTEwMi45LDI5LjVMMTMzNiwxNzQ4YzMyLjYtMjEuMyw3OS45LTM1LDEyOS43LTM1CgkJCWMxMjAuOCwwLDE1MC4zLDgyLjMsMTUwLjMsMTYxLjZ2MTQ3LjljMCwzNC4zLDEuNyw2Ny45LDYuNSw5NC43TDE1NTcuMywyMTE3LjFMMTU1Ny4zLDIxMTcuMXogTTE1NDYuNiwxOTE1LjQKCQkJYy03OC42LTEuNy0xNjcuNCwxMi40LTE2Ny40LDg4LjljMCw0Ni43LDMwLjksNjguNiw2Ny45LDY4LjZjNTEuNSwwLDg0LjEtMzIuNiw5NS43LTY2LjJjMi40LTcuMiwzLjgtMTUuMSw0LjEtMjN2LTY4LjNIMTU0Ni42eiIKCQkJLz4KCQk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNMTc4OS4yLDE2MDguM3YxMTMuNmgxMDIuOXY1NC45aC0xMDIuOXYyMTMuMWMwLDQ5LjEsMTMuNyw3Ni44LDUzLjksNzYuOGMxNC4xLDAuMywyOC4xLTEuNCw0MS41LTQuOAoJCQlsMy40LDUzLjljLTEzLjcsNS44LTM2LDkuOS02My44LDkuOWMtMzMuNiwwLTYwLjQtMTAuNi03Ny41LTMwLjJjLTIwLjYtMjEuMy0yNy44LTU2LjMtMjcuOC0xMDIuOXYtMjE1LjVoLTYxLjR2LTU0LjloNjEuNHYtOTQuNwoJCQlMMTc4OS4yLDE2MDguM3oiLz4KCQk8cGF0aCBjbGFzcz0ic3QyIiBkPSJNNzYuMiw3NTMuMWw2OS4zLDE5LjJMMTQyMCwxMTg0LjZsMCwwbDkuOSwyLjdsODEtNzMuMWwtMi4xLTkuNmwtMjI3LjUtNzMuNEwyMzQsNjkyLjdsLTEwNi0zOC44bC04MC4zLDcxLjcKCQkJQzY5LDc1MS4zLDU1LjksNzI2LjYsNzYuMiw3NTMuMXoiLz4KCTwvZz4KPC9nPgo8L3N2Zz4K" class="sec-logo"></p>
 </section>
 <section id="written-down-expectations" class="slide level2 s-testthat">
@@ -1562,14 +1561,14 @@ display:block!important;
 </ol>
 </div>
 </section>
-<section id="two-tools-two-places" class="slide level2 s-testthat">
-<h2>Two tools, two places</h2>
+<section id="one-tool-two-places" class="slide level2 s-testthat">
+<h2>One tool, two places</h2>
 <table class="caption-top">
 <thead>
 <tr class="header">
 <th></th>
-<th><code>checkmate</code></th>
-<th><code>testthat</code></th>
+<th>In your scripts</th>
+<th>In <code>tests/testthat/</code></th>
 </tr>
 </thead>
 <tbody>
@@ -1579,9 +1578,9 @@ display:block!important;
 <td>your <strong>functions</strong></td>
 </tr>
 <tr class="even">
-<td>Lives in</td>
-<td><code>scripts/</code> (and inside functions)</td>
-<td><code>tests/testthat/</code></td>
+<td>Written with</td>
+<td><code>testthat::expect_*()</code></td>
+<td><code>test_that()</code> blocks</td>
 </tr>
 <tr class="odd">
 <td>Runs</td>
@@ -1613,8 +1612,9 @@ display:block!important;
 <span id="cb10-11"><a href aria-label="11"></a>processed <span class="ot">&lt;-</span> <span class="fu">left_join</span>(<span class="at">x =</span> raw, <span class="at">y =</span> sites, <span class="at">by =</span> <span class="fu">join_by</span>(site_id), ...)</span>
 <span id="cb10-12"><a href aria-label="12"></a></span>
 <span id="cb10-13"><a href aria-label="13"></a><span class="co"># 3. On the way out</span></span>
-<span id="cb10-14"><a href aria-label="14"></a>checkmate<span class="sc">::</span><span class="fu">assert_data_frame</span>(<span class="at">x =</span> processed, <span class="at">nrows =</span> <span class="fu">nrow</span>(raw))</span>
-<span id="cb10-15"><a href aria-label="15"></a>checkmate<span class="sc">::</span><span class="fu">assert_numeric</span>(<span class="at">x =</span> processed[[<span class="st">&quot;abundance&quot;</span>]], <span class="at">lower =</span> <span class="dv">0</span>, <span class="at">any.missing =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-14"><a href aria-label="14"></a>testthat<span class="sc">::</span><span class="fu">expect_equal</span>(<span class="at">object =</span> <span class="fu">nrow</span>(processed), <span class="at">expected =</span> <span class="fu">nrow</span>(raw))</span>
+<span id="cb10-15"><a href aria-label="15"></a>testthat<span class="sc">::</span><span class="fu">expect_false</span>(<span class="at">object =</span> <span class="fu">anyNA</span>(processed[[<span class="st">&quot;abundance&quot;</span>]]))</span>
+<span id="cb10-16"><a href aria-label="16"></a>testthat<span class="sc">::</span><span class="fu">expect_gte</span>(<span class="at">object =</span> <span class="fu">min</span>(processed[[<span class="st">&quot;abundance&quot;</span>]]), <span class="at">expected =</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="joins-be-explicit-be-intentional" class="slide level2 s-testthat">
@@ -1629,7 +1629,7 @@ display:block!important;
 <span id="cb11-7"><a href aria-label="7"></a>)</span>
 <span id="cb11-8"><a href aria-label="8"></a></span>
 <span id="cb11-9"><a href aria-label="9"></a><span class="co"># a row without a site gets NA: stop</span></span>
-<span id="cb11-10"><a href aria-label="10"></a>checkmate<span class="sc">::</span><span class="fu">assert_character</span>(<span class="at">x =</span> processed[[<span class="st">&quot;region&quot;</span>]], <span class="at">any.missing =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-10"><a href aria-label="10"></a>testthat<span class="sc">::</span><span class="fu">expect_false</span>(<span class="at">object =</span> <span class="fu">anyNA</span>(processed[[<span class="st">&quot;region&quot;</span>]]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p>Every argument is a <strong>decision</strong>. Writing them makes you think about the join, and saves you writing a test for it.</p>
@@ -1648,20 +1648,52 @@ display:block!important;
 }</style></aside>
 </div>
 </section>
+<section id="reshaping-be-explicit-too" class="slide level2 s-testthat">
+<h2>Reshaping: be explicit too</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href aria-label="1"></a>wide <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(</span>
+<span id="cb12-2"><a href aria-label="2"></a>  <span class="at">data =</span> counts,</span>
+<span id="cb12-3"><a href aria-label="3"></a>  <span class="at">id_cols =</span> site_id,           <span class="co"># which columns identify a row: not &quot;all the others&quot;</span></span>
+<span id="cb12-4"><a href aria-label="4"></a>  <span class="at">names_from =</span> species,</span>
+<span id="cb12-5"><a href aria-label="5"></a>  <span class="at">names_prefix =</span> <span class="st">&quot;abund_&quot;</span>,</span>
+<span id="cb12-6"><a href aria-label="6"></a>  <span class="at">values_from =</span> abundance,</span>
+<span id="cb12-7"><a href aria-label="7"></a>  <span class="at">values_fn =</span> sum,             <span class="co"># duplicated site and species: add them up, on purpose</span></span>
+<span id="cb12-8"><a href aria-label="8"></a>  <span class="at">values_fill =</span> <span class="dv">0</span>              <span class="co"># a species not seen at a site: 0, on purpose</span></span>
+<span id="cb12-9"><a href aria-label="9"></a>)</span>
+<span id="cb12-10"><a href aria-label="10"></a></span>
+<span id="cb12-11"><a href aria-label="11"></a>testthat<span class="sc">::</span><span class="fu">expect_equal</span>(<span class="at">object =</span> <span class="fu">nrow</span>(wide), <span class="at">expected =</span> dplyr<span class="sc">::</span><span class="fu">n_distinct</span>(counts[[<span class="st">&quot;site_id&quot;</span>]]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p>Left to its defaults, <code>pivot_wider()</code> turns duplicates into <strong>list-columns</strong> and leaves gaps as <code>NA</code>. <code>pivot_longer()</code> is the same: say <code>cols</code>, <code>names_to</code> and <code>values_drop_na</code>.</p>
+<aside class="notes">
+<p>Same spirit as the join slide. With duplicated rows tidyr only warns and builds list-columns, a result that looks fine until a later step breaks. values_fn and values_fill turn the silent choices into decisions. Checked in R: without values_fn the duplicate gives list-columns plus a warning.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</div>
+</section>
 <section id="testthat-tests-your-functions" class="slide level2 s-testthat">
 <h2>testthat tests your functions</h2>
 <p><code>R/check_data.R</code> has <code>check_dataset()</code>. <code>tests/testthat/test-check_data.R</code> tests <strong>it</strong>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href aria-label="1"></a>testthat<span class="sc">::</span><span class="fu">test_that</span>(<span class="st">&quot;check_dataset rejects duplicated ids&quot;</span>, {</span>
-<span id="cb12-2"><a href aria-label="2"></a>  bad <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="at">site =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>))</span>
-<span id="cb12-3"><a href aria-label="3"></a>  testthat<span class="sc">::</span><span class="fu">expect_error</span>(</span>
-<span id="cb12-4"><a href aria-label="4"></a>    <span class="fu">check_dataset</span>(<span class="at">x =</span> bad, <span class="at">required_columns =</span> <span class="st">&quot;site&quot;</span>, <span class="at">id_column =</span> <span class="st">&quot;id&quot;</span>)</span>
-<span id="cb12-5"><a href aria-label="5"></a>  )</span>
-<span id="cb12-6"><a href aria-label="6"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href aria-label="1"></a>testthat<span class="sc">::</span><span class="fu">test_that</span>(<span class="st">&quot;check_dataset rejects duplicated ids&quot;</span>, {</span>
+<span id="cb13-2"><a href aria-label="2"></a>  bad <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="at">site =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>))</span>
+<span id="cb13-3"><a href aria-label="3"></a>  testthat<span class="sc">::</span><span class="fu">expect_error</span>(</span>
+<span id="cb13-4"><a href aria-label="4"></a>    <span class="fu">check_dataset</span>(<span class="at">x =</span> bad, <span class="at">required_columns =</span> <span class="st">&quot;site&quot;</span>, <span class="at">id_column =</span> <span class="st">&quot;id&quot;</span>)</span>
+<span id="cb13-5"><a href aria-label="5"></a>  )</span>
+<span id="cb13-6"><a href aria-label="6"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Run <strong>all</strong> tests in the folder with:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href aria-label="1"></a>testthat<span class="sc">::</span><span class="fu">test_dir</span>(<span class="st">&quot;tests/testthat&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href aria-label="1"></a>testthat<span class="sc">::</span><span class="fu">test_dir</span>(<span class="st">&quot;tests/testthat&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section></section>
 <section>
@@ -1675,26 +1707,26 @@ display:block!important;
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-1-1">Before</a></li><li><a href="#tabset-1-2">After</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href aria-label="1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">2</span><span class="sc">:</span><span class="dv">3</span><span class="sc">*</span>(<span class="dv">4</span><span class="sc">/</span><span class="dv">5</span>)</span>
-<span id="cb14-2"><a href aria-label="2"></a></span>
-<span id="cb14-3"><a href aria-label="3"></a>left_join <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">by =</span> <span class="cn">NULL</span>, <span class="at">copy =</span> <span class="cn">FALSE</span>, <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">&quot;.x&quot;</span>, <span class="st">&quot;.y&quot;</span>), ..., <span class="at">keep =</span> <span class="cn">NULL</span>) {</span>
-<span id="cb14-4"><a href aria-label="4"></a>  Do something</span>
-<span id="cb14-5"><a href aria-label="5"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href aria-label="1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">2</span><span class="sc">:</span><span class="dv">3</span><span class="sc">*</span>(<span class="dv">4</span><span class="sc">/</span><span class="dv">5</span>)</span>
+<span id="cb15-2"><a href aria-label="2"></a></span>
+<span id="cb15-3"><a href aria-label="3"></a>left_join <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">by =</span> <span class="cn">NULL</span>, <span class="at">copy =</span> <span class="cn">FALSE</span>, <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">&quot;.x&quot;</span>, <span class="st">&quot;.y&quot;</span>), ..., <span class="at">keep =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb15-4"><a href aria-label="4"></a>  Do something</span>
+<span id="cb15-5"><a href aria-label="5"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href aria-label="1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span> <span class="sc">*</span> (<span class="dv">4</span> <span class="sc">/</span> <span class="dv">5</span>)</span>
-<span id="cb15-2"><a href aria-label="2"></a></span>
-<span id="cb15-3"><a href aria-label="3"></a>left_join <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
-<span id="cb15-4"><a href aria-label="4"></a>  x,</span>
-<span id="cb15-5"><a href aria-label="5"></a>  y,</span>
-<span id="cb15-6"><a href aria-label="6"></a>  <span class="at">by =</span> <span class="cn">NULL</span>,</span>
-<span id="cb15-7"><a href aria-label="7"></a>  <span class="at">copy =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb15-8"><a href aria-label="8"></a>  <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">&quot;.x&quot;</span>, <span class="st">&quot;.y&quot;</span>),</span>
-<span id="cb15-9"><a href aria-label="9"></a>  ...,</span>
-<span id="cb15-10"><a href aria-label="10"></a>  <span class="at">keep =</span> <span class="cn">NULL</span></span>
-<span id="cb15-11"><a href aria-label="11"></a>) {</span>
-<span id="cb15-12"><a href aria-label="12"></a>  Do something</span>
-<span id="cb15-13"><a href aria-label="13"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href aria-label="1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span> <span class="sc">*</span> (<span class="dv">4</span> <span class="sc">/</span> <span class="dv">5</span>)</span>
+<span id="cb16-2"><a href aria-label="2"></a></span>
+<span id="cb16-3"><a href aria-label="3"></a>left_join <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
+<span id="cb16-4"><a href aria-label="4"></a>  x,</span>
+<span id="cb16-5"><a href aria-label="5"></a>  y,</span>
+<span id="cb16-6"><a href aria-label="6"></a>  <span class="at">by =</span> <span class="cn">NULL</span>,</span>
+<span id="cb16-7"><a href aria-label="7"></a>  <span class="at">copy =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb16-8"><a href aria-label="8"></a>  <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">&quot;.x&quot;</span>, <span class="st">&quot;.y&quot;</span>),</span>
+<span id="cb16-9"><a href aria-label="9"></a>  ...,</span>
+<span id="cb16-10"><a href aria-label="10"></a>  <span class="at">keep =</span> <span class="cn">NULL</span></span>
+<span id="cb16-11"><a href aria-label="11"></a>) {</span>
+<span id="cb16-12"><a href aria-label="12"></a>  Do something</span>
+<span id="cb16-13"><a href aria-label="13"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1836,7 +1868,7 @@ display:block!important;
 <p>Git hooks are scripts git runs for you.</p>
 <div class="fragment">
 <p>The <code>githooks</code> branch keeps them in a tracked folder and switches them on with one line:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href aria-label="1"></a><span class="fu">git</span> config core.hooksPath .githooks</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href aria-label="1"></a><span class="fu">git</span> config core.hooksPath .githooks</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>This is the reason the branch exists at all. Without the tracked folder, every colleague would have to copy files by hand.</p>
 <style type="text/css">

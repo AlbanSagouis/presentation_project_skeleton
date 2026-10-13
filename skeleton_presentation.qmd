@@ -223,24 +223,23 @@ The renv.lock one is the most common mistake: people ignore the whole renv folde
 ## A commented `.gitignore` {.s-green}
 
 ```
-# Data: recreated or shared via pins, not stored in git
-data/*
-!data/README.md
+# Track what you wrote, ignore the rest
 
-# Outputs: recreated by scripts
-outputs/*
-!outputs/README.md
-
-# R session litter
+## Private or personal
+### Secrets
+.Renviron
+### R session files
 .Rhistory
-.RData
-.Rproj.user/
+.Rproj.user
 
-# renv: track renv.lock, ignore the library
-renv/library/
+## Recreated by the code
+### Data
+data/raw/**
+### Outputs
+outputs/**
 ```
 
-The file in the repo explains each block.
+The file in the repo has the same layout, explains each block and covers more (OS files, rendered files, renv).
 
 # When your data lives outside the repo: pins {.s-pins}
 
@@ -361,7 +360,7 @@ Mind the **R version** too: 2023 packages, 2023 R.
 renv::checkout() with a date uses Posit Public Package Manager snapshots. By default it covers every package the project uses (found by renv::dependencies()). Docs: rstudio.github.io/renv/reference/checkout.html. I have not tried this on a really old project yet: say so.
 :::
 
-# Testing your data with testthat and checkmate {.s-testthat}
+# Testing your data with testthat {.s-testthat}
 
 ![](assets/testthat.svg){.sec-logo .nostretch}
 
@@ -377,12 +376,12 @@ Write them down, at three points:
 2. **Wrangling**: joins did not duplicate rows
 3. **Output**: values are in a plausible range
 
-## Two tools, two places {.s-testthat}
+## One tool, two places {.s-testthat}
 
-| | `checkmate` | `testthat` |
+| | In your scripts | In `tests/testthat/` |
 |---|---|---|
 | Checks | your **data** | your **functions** |
-| Lives in | `scripts/` (and inside functions) | `tests/testthat/` |
+| Written with | `testthat::expect_*()` | `test_that()` blocks |
 | Runs | every time the script runs | when you ask |
 | Fails by | stopping the script | reporting a failed test |
 
@@ -405,8 +404,9 @@ raw |>
 processed <- left_join(x = raw, y = sites, by = join_by(site_id), ...)
 
 # 3. On the way out
-checkmate::assert_data_frame(x = processed, nrows = nrow(raw))
-checkmate::assert_numeric(x = processed[["abundance"]], lower = 0, any.missing = FALSE)
+testthat::expect_equal(object = nrow(processed), expected = nrow(raw))
+testthat::expect_false(object = anyNA(processed[["abundance"]]))
+testthat::expect_gte(object = min(processed[["abundance"]]), expected = 0)
 ```
 
 ## Joins: be explicit, be intentional {.s-testthat}
@@ -422,7 +422,7 @@ processed <- left_join(
 )
 
 # a row without a site gets NA: stop
-checkmate::assert_character(x = processed[["region"]], any.missing = FALSE)
+testthat::expect_false(object = anyNA(processed[["region"]]))
 ```
 
 . . .
@@ -431,6 +431,31 @@ Every argument is a **decision**. Writing them makes you think about the join, a
 
 ::: notes
 This is the spirit of my r-code-style skill: relationship and unmatched default to silence, and both failure modes (duplicated keys multiply rows, missing keys fill with NA) corrupt a result without an error. Being explicit turns them into loud failures at the join.
+:::
+
+## Reshaping: be explicit too {.s-testthat}
+
+```{r}
+#| label: explicit-pivot
+wide <- tidyr::pivot_wider(
+  data = counts,
+  id_cols = site_id,           # which columns identify a row: not "all the others"
+  names_from = species,
+  names_prefix = "abund_",
+  values_from = abundance,
+  values_fn = sum,             # duplicated site and species: add them up, on purpose
+  values_fill = 0              # a species not seen at a site: 0, on purpose
+)
+
+testthat::expect_equal(object = nrow(wide), expected = dplyr::n_distinct(counts[["site_id"]]))
+```
+
+. . .
+
+Left to its defaults, `pivot_wider()` turns duplicates into **list-columns** and leaves gaps as `NA`. `pivot_longer()` is the same: say `cols`, `names_to` and `values_drop_na`.
+
+::: notes
+Same spirit as the join slide. With duplicated rows tidyr only warns and builds list-columns, a result that looks fine until a later step breaks. values_fn and values_fill turn the silent choices into decisions. Checked in R: without values_fn the duplicate gives list-columns plus a warning.
 :::
 
 ## testthat tests your functions {.s-testthat}
