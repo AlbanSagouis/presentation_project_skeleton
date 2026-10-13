@@ -238,7 +238,7 @@ The file in the repo explains each block.
 
 # When your data lives outside the repo: pins {.s-pins}
 
-![](assets/pins.png){.sec-logo}
+![](assets/pins.png){.sec-logo .nostretch}
 
 ## One copy, one name {.s-pins}
 
@@ -287,7 +287,7 @@ In depth: my May 2026 group meeting talk on `pins` (2026-05-13): [github.com/Alb
 
 # Reproducible packages with renv {.s-renv}
 
-![](assets/renv.svg){.sec-logo}
+![](assets/renv.svg){.sec-logo .nostretch}
 
 ## The problem {.s-renv}
 
@@ -357,7 +357,7 @@ renv::checkout() with a date uses Posit Public Package Manager snapshots. By def
 
 # Testing your data with testthat and checkmate {.s-testthat}
 
-![](assets/testthat.svg){.sec-logo}
+![](assets/testthat.svg){.sec-logo .nostretch}
 
 ## Written-down expectations {.s-testthat}
 
