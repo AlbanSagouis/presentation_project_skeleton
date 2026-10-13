@@ -645,3 +645,15 @@ Download the zip, read `PROJECT_STRUCTURE.md`, delete it, write your own `README
 ::: {.muted}
 Questions?
 :::
+
+## Thank you {.s-green}
+
+Six years of questions, patience and good company.
+
+::: {.statement}
+"Thank you, team"
+:::
+
+::: notes
+Mean it, keep it short. Then questions.
+:::
