@@ -576,9 +576,9 @@ Do it when the paper is submitted, not before. Zenodo has a sandbox (sandbox.zen
 The README badge uses the concept DOI: it always points to the latest version.
 :::
 
-# Quarto website {.s-yellow}
+# Project website {.s-yellow}
 
-## From project to website {.s-yellow}
+## From presentation to website {.s-yellow}
 
 The `website` branch turns the README and your analysis into a small site.
 
