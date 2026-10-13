@@ -65,7 +65,7 @@ Today: I boiled it down to just one repo, `project-skeleton/`.
 Low friction is the design goal. Everything shown today is in the repo, and the repo docs mirror the section names of this presentation.
 :::
 
-# A Standard structure {.s-blue}
+# A standard structure {.s-blue}
 
 ## Do these feel familiar? {.s-blue}
 
