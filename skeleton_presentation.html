@@ -1073,11 +1073,6 @@ Alban Sagouis
 
   <p class="date">2026-10-12</p>
 </section>
-<section>
-<section id="a-confession" class="title-slide slide level1 s-green center">
-<h1>A confession</h1>
-
-</section>
 <section id="why-now" class="slide level2 s-green">
 <h2>Why now?</h2>
 <p>I am leaving the team in a few months.</p>
@@ -1124,10 +1119,10 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </div>
-</section></section>
+</section>
 <section>
-<section id="why-this-structure" class="title-slide slide level1 s-blue center">
-<h1>Why this structure</h1>
+<section id="a-standard-structure" class="title-slide slide level1 s-blue center">
+<h1>A Standard structure</h1>
 
 </section>
 <section id="do-these-feel-familiar" class="slide level2 s-blue">
@@ -1169,8 +1164,15 @@ display:block!important;
 <div class="fragment">
 <p>Now the same project, with a place for everything:</p>
 <pre><code>fish_survey/
-├── data/       ├── scripts/    ├── R/
-├── outputs/    ├── tests/      └── README.md</code></pre>
+├── data/
+├── scripts/
+├── R/
+├── outputs/
+├── tests/
+└── README.md</code></pre>
+</div>
+<div class="fragment">
+<p>But why though?</p>
 </div>
 </section>
 <section id="section" class="slide level2 s-blue">
@@ -1240,12 +1242,12 @@ display:block!important;
 <td>inputs (mostly <strong>not</strong> tracked, see later)</td>
 </tr>
 <tr class="even">
-<td><code>R/</code></td>
-<td><strong>functions</strong>, sourced by scripts and tests</td>
-</tr>
-<tr class="odd">
 <td><code>scripts/</code></td>
 <td>numbered scripts that run in order, <strong>with your data checks</strong></td>
+</tr>
+<tr class="odd">
+<td><code>R/</code></td>
+<td><strong>functions</strong>, sourced by scripts and tests</td>
 </tr>
 <tr class="even">
 <td><code>outputs/</code></td>
@@ -1286,7 +1288,7 @@ display:block!important;
 <li><code>renv::init()</code> now or wait until the end, before you share the code</li>
 <li>Read <code>PROJECT_STRUCTURE.md</code>, then <strong>delete it</strong></li>
 </ol>
-<p>No git history to inherit: <code>git init</code> when you are ready, or forced.</p>
+<p><code>git init</code> when you are ready.</p>
 </section></section>
 <section>
 <section id="what-to-track-and-what-to-ignore" class="title-slide slide level1 s-green center">
@@ -1459,7 +1461,7 @@ renv/library/</code></pre>
 </div>
 <p>The data changed after the first submission? Note the version in your script and the reviewer’s figure comes back.</p>
 <div class="fragment">
-<p>In depth: my May 2026 group meeting talk on <code>pins</code> (2026-05-13): <a href="https://github.com/AlbanSagouis/pins_presentation">github.com/AlbanSagouis/pins_presentation</a></p>
+<p>In depth: my group meeting talk on <code>pins</code>: <a href="https://github.com/AlbanSagouis/pins_presentation">github.com/AlbanSagouis/pins_presentation</a></p>
 </div>
 </section></section>
 <section>
@@ -1721,14 +1723,18 @@ display:block!important;
 <p>Running <code>air</code> and the linter <code>jarl</code> on every commit is a job for a git hook: see the <code>githooks</code> branch, next section.</p>
 </section></section>
 <section>
-<section id="optional-add-on-branches" class="title-slide slide level1 s-yellow center">
-<h1>Optional add-on branches</h1>
+<section id="optional-add-ons" class="title-slide slide level1 s-yellow center">
+<h1>Optional add-ons</h1>
 
 </section>
 <section id="three-branches-three-extras" class="slide level2 s-yellow">
 <h2>Three branches, three extras</h2>
 <p>Each branch adds one thing. Take only what you want.</p>
 <table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Branch</th>
@@ -1737,93 +1743,21 @@ display:block!important;
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>githooks</code></td>
-<td>pre-commit and pre-push checks (<code>air</code>, <code>jarl</code>, tests)</td>
+<td><code>zenodo</code></td>
+<td>archive a release and get a DOI, badge shows in the README</td>
 </tr>
 <tr class="even">
-<td><code>zenodo</code></td>
-<td>archive a release and get a DOI, badge in the README</td>
-</tr>
-<tr class="odd">
 <td><code>website</code></td>
 <td>project website, published with GitHub Pages</td>
+</tr>
+<tr class="odd">
+<td><code>githooks</code></td>
+<td>pre-commit and pre-push checks (<code>air</code>, <code>jarl</code>, tests)</td>
 </tr>
 </tbody>
 </table>
 <aside class="notes">
 <p>Say clearly: main is complete without these. Each branch changes only a few files, so <code>git diff main..&lt;branch&gt;</code> shows exactly what it adds.</p>
-<style type="text/css">
-span.MJX_Assistive_MathML {
-position:absolute!important;
-clip: rect(1px, 1px, 1px, 1px);
-padding: 1px 0 0 0!important;
-border: 0!important;
-height: 1px!important;
-width: 1px!important;
-overflow: hidden!important;
-display:block!important;
-}</style></aside>
-</section></section>
-<section>
-<section id="git-hooks" class="title-slide slide level1 s-green center">
-<h1>Git hooks</h1>
-
-</section>
-<section id="checks-that-run-on-every-commit" class="slide level2 s-green">
-<h2>Checks that run on every commit</h2>
-<p>Git hooks are scripts git runs for you. But <code>.git/hooks</code> is <strong>never tracked</strong>, so nobody receives your hooks.</p>
-<div class="fragment">
-<p>The <code>githooks</code> branch keeps them in a tracked folder and switches them on with one line:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href aria-label="1"></a><span class="fu">git</span> config core.hooksPath .githooks</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<aside class="notes">
-<p>This is the reason the branch exists at all. Without the tracked folder, every colleague would have to copy files by hand.</p>
-<style type="text/css">
-span.MJX_Assistive_MathML {
-position:absolute!important;
-clip: rect(1px, 1px, 1px, 1px);
-padding: 1px 0 0 0!important;
-border: 0!important;
-height: 1px!important;
-width: 1px!important;
-overflow: hidden!important;
-display:block!important;
-}</style></aside>
-</div>
-</section>
-<section id="what-the-hooks-do" class="slide level2 s-green">
-<h2>What the hooks do</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Hook</th>
-<th>Runs</th>
-<th>Checks</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>pre-commit</code></td>
-<td>before each commit</td>
-<td><code>air format --check</code>, <code>jarl check</code>, tests</td>
-</tr>
-<tr class="even">
-<td><code>pre-push</code></td>
-<td>before each push</td>
-<td>tests</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>No <code>air</code> or <code>jarl</code> installed? A warning, and that check is skipped. Nobody is blocked.</li>
-<li>In a hurry? <code>git commit --no-verify</code> skips the hooks once.</li>
-</ul>
-<aside class="notes">
-<p>Tested for real: badly formatted file blocked, clean file passes, missing tools skip, failing test blocks. Not tested: a real git push, Windows. air ignores .qmd files at the moment.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1911,6 +1845,78 @@ display:block!important;
 </div>
 </section></section>
 <section>
+<section id="git-hooks" class="title-slide slide level1 s-green center">
+<h1>Git hooks</h1>
+
+</section>
+<section id="checks-that-run-on-every-commit" class="slide level2 s-green">
+<h2>Checks that run on every commit</h2>
+<p>Git hooks are scripts git runs for you. But <code>.git/hooks</code> is <strong>never tracked</strong>, so nobody receives your hooks.</p>
+<div class="fragment">
+<p>The <code>githooks</code> branch keeps them in a tracked folder and switches them on with one line:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href aria-label="1"></a><span class="fu">git</span> config core.hooksPath .githooks</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p>This is the reason the branch exists at all. Without the tracked folder, every colleague would have to copy files by hand.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</div>
+</section>
+<section id="what-the-hooks-do" class="slide level2 s-green">
+<h2>What the hooks do</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Hook</th>
+<th>Runs</th>
+<th>Checks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>pre-commit</code></td>
+<td>before each commit</td>
+<td><code>air format --check</code>, <code>jarl check</code>, tests</td>
+</tr>
+<tr class="even">
+<td><code>pre-push</code></td>
+<td>before each push</td>
+<td>tests</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>No <code>air</code> or <code>jarl</code> installed? A warning, and that check is skipped. Nobody is blocked.</li>
+<li>In a hurry? <code>git commit --no-verify</code> skips the hooks once.</li>
+</ul>
+<aside class="notes">
+<p>Tested for real: badly formatted file blocked, clean file passes, missing tools skip, failing test blocks. Not tested: a real git push, Windows. air ignores .qmd files at the moment.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section></section>
+<section>
 <section id="how-i-made-this-an-ai-skill" class="title-slide slide level1 s-green center">
 <h1>How I made this: an AI skill</h1>
 
@@ -1927,7 +1933,7 @@ display:block!important;
 </section>
 <section id="skills-as-part-of-the-scientific-process" class="slide level2 s-green">
 <h2>Skills as part of the scientific process?</h2>
-<p>My skills live in a <strong>private</strong> GitHub repo, <code>github.com/albansagouis/skills</code>. It is a backup, not a product.</p>
+<p>My skills live in a <strong>private</strong> GitHub repo, <code>github.com/albansagouis/skills</code>. It is a backup, not public yet.</p>
 <div class="fragment">
 <p>A question I keep coming back to: if a skill shapes how your analysis is written, should it be archived and cited with the project, like <code>renv.lock</code>?</p>
 </div>

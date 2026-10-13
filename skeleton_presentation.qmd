@@ -35,8 +35,6 @@ execute:
   warning: false
 ---
 
-# A confession {.s-green}
-
 ## Why now? {.s-green}
 
 I am leaving the team in a few months.
@@ -67,7 +65,7 @@ Today: I boiled it down to just one repo, `project-skeleton/`.
 Low friction is the design goal. Everything shown today is in the repo, and the repo docs mirror the section names of this presentation.
 :::
 
-# Why this structure {.s-blue}
+# A Standard structure {.s-blue}
 
 ## Do these feel familiar? {.s-blue}
 
@@ -104,9 +102,17 @@ Now the same project, with a place for everything:
 
 ```
 fish_survey/
-├── data/       ├── scripts/    ├── R/
-├── outputs/    ├── tests/      └── README.md
+├── data/
+├── scripts/
+├── R/
+├── outputs/
+├── tests/
+└── README.md
 ```
+
+. . .
+
+But why though?
 
 ## {.s-blue}
 
@@ -131,8 +137,8 @@ fish_survey/
 | Folder | Content |
 |---|---|
 | `data/` | inputs (mostly **not** tracked, see later) |
-| `R/` | **functions**, sourced by scripts and tests |
 | `scripts/` | numbered scripts that run in order, **with your data checks** |
+| `R/` | **functions**, sourced by scripts and tests |
 | `outputs/` | figures, tables, models: recreated by scripts |
 | `tests/` | `testthat` tests of the **functions** in `R/` (not of your data) |
 | `docs/` | notes, images, anything for humans (and agents) |
@@ -152,7 +158,7 @@ Why simple: the colleague repo we looked at had Analysis-Code/, code/, data/raw_
 5. `renv::init()` now or wait until the end, before you share the code
 6. Read `PROJECT_STRUCTURE.md`, then **delete it**
 
-No git history to inherit: `git init` when you are ready, or forced.
+`git init` when you are ready.
 
 # What to track and what to ignore {.s-green}
 
@@ -283,7 +289,7 @@ The data changed after the first submission? Note the version in your script and
 
 . . .
 
-In depth: my May 2026 group meeting talk on `pins` (2026-05-13): [github.com/AlbanSagouis/pins_presentation](https://github.com/AlbanSagouis/pins_presentation)
+In depth: my group meeting talk on `pins`: [github.com/AlbanSagouis/pins_presentation](https://github.com/AlbanSagouis/pins_presentation)
 
 # Reproducible packages with renv {.s-renv}
 
@@ -500,7 +506,7 @@ Install the air command line tool first (posit-dev.github.io/air/editors.html). 
 
 Running `air` and the linter `jarl` on every commit is a job for a git hook: see the `githooks` branch, next section.
 
-# Optional add-on branches {.s-yellow}
+# Optional add-ons {.s-yellow}
 
 ## Three branches, three extras {.s-yellow}
 
@@ -508,45 +514,14 @@ Each branch adds one thing. Take only what you want.
 
 | Branch | What it adds |
 |---|---|
-| `githooks` | pre-commit and pre-push checks (`air`, `jarl`, tests) |
-| `zenodo` | archive a release and get a DOI, badge in the README |
+| `zenodo` | archive a release and get a DOI, badge shows in the README |
 | `website` | project website, published with GitHub Pages |
+| `githooks` | pre-commit and pre-push checks (`air`, `jarl`, tests) |
 
 ::: notes
 Say clearly: main is complete without these. Each branch changes only a few files, so `git diff main..<branch>` shows exactly what it adds.
 :::
 
-# Git hooks {.s-green}
-
-## Checks that run on every commit {.s-green}
-
-Git hooks are scripts git runs for you. But `.git/hooks` is **never tracked**, so nobody receives your hooks.
-
-. . .
-
-The `githooks` branch keeps them in a tracked folder and switches them on with one line:
-
-```{.bash}
-git config core.hooksPath .githooks
-```
-
-::: notes
-This is the reason the branch exists at all. Without the tracked folder, every colleague would have to copy files by hand.
-:::
-
-## What the hooks do {.s-green}
-
-| Hook | Runs | Checks |
-|---|---|---|
-| `pre-commit` | before each commit | `air format --check`, `jarl check`, tests |
-| `pre-push` | before each push | tests |
-
-- No `air` or `jarl` installed? A warning, and that check is skipped. Nobody is blocked.
-- In a hurry? `git commit --no-verify` skips the hooks once.
-
-::: notes
-Tested for real: badly formatted file blocked, clean file passes, missing tools skip, failing test blocks. Not tested: a real git push, Windows. air ignores .qmd files at the moment.
-:::
 
 # Archiving with Zenodo {.s-blue}
 
@@ -596,6 +571,39 @@ The site is public. It must render without your data, and never show private out
 Untested on GitHub itself: the workflow has not run yet. First publish once locally with quarto publish gh-pages, then set Pages to the gh-pages branch.
 :::
 
+
+# Git hooks {.s-green}
+
+## Checks that run on every commit {.s-green}
+
+Git hooks are scripts git runs for you. But `.git/hooks` is **never tracked**, so nobody receives your hooks.
+
+. . .
+
+The `githooks` branch keeps them in a tracked folder and switches them on with one line:
+
+```{.bash}
+git config core.hooksPath .githooks
+```
+
+::: notes
+This is the reason the branch exists at all. Without the tracked folder, every colleague would have to copy files by hand.
+:::
+
+## What the hooks do {.s-green}
+
+| Hook | Runs | Checks |
+|---|---|---|
+| `pre-commit` | before each commit | `air format --check`, `jarl check`, tests |
+| `pre-push` | before each push | tests |
+
+- No `air` or `jarl` installed? A warning, and that check is skipped. Nobody is blocked.
+- In a hurry? `git commit --no-verify` skips the hooks once.
+
+::: notes
+Tested for real: badly formatted file blocked, clean file passes, missing tools skip, failing test blocks. Not tested: a real git push, Windows. air ignores .qmd files at the moment.
+:::
+
 # How I made this: an AI skill {.s-green}
 
 ## What is a skill? {.s-green}
@@ -610,7 +618,7 @@ Three of mine were involved:
 
 ## Skills as part of the scientific process? {.s-green}
 
-My skills live in a **private** GitHub repo, `github.com/albansagouis/skills`. It is a backup, not a product.
+My skills live in a **private** GitHub repo, `github.com/albansagouis/skills`. It is a backup, not public yet.
 
 . . .
 
